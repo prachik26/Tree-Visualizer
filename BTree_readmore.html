@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Introduction: B Tree</title>
+</head>
+<body>
+    <div class="btreeread">
+        <h1><center>BTree</center></h1>
+    <br>
+    <div id="new">
+        <h1><b>What is a B Tree?</b></h1>
+        <p><img src="/images/images.png" alt="alt text" height="300" width="400" style="float: right">B Tree is a specialized m-way tree that can be widely used for disk access. 
+            The need for B-Trees arose as a result of the growing need to reduce access times to physical storage media such as hard drives.
+            Larger secondary storage devices are slower and we wanted these types of data structures to minimize disk access.
+
+            Other data structures such as binary search trees, AVL trees, and red-black trees can only store one key per node. 
+            If you need to store a large number of keys, the height of such a tree can become very large, resulting in long access times.</p>
+        <br>
+        <!-- <div id="image">
+            <img src="" height="400" width="400" />
+        </div>
+     -->
+        <h3><b>Properties of a B-tree</b></h3>
+        <ul>
+            <li>For each node x, the keys are stored in increasing order.</li>
+            <li>If m is the order of the tree, each internal node can contain at most m - 1 keys along with a pointer to each child.</li>
+            <li>Each node except root can have at most m children and at least m/2 children.</li>
+            <li>All leaves have the same depth (i.e. height-h of the tree).</li>
+            <li>The root has at least 2 children and contains a minimum of 1 key.</li>
+            <li>If m ≥ 1, then for any m-key B-tree of height h and minimum degree t ≥ 2, h ≥ logt (m+1)/2.</li>
+            
+        </ul>
+        <br>
+        <h3><b>Basic Operations on B-Tree</b></h3>
+        <ul>
+            <li>Create: Creates an empty tree.</li>
+            <li>Insert: Insert a node in the tree.</li>
+            <li>Search: Searches for a node in the tree.</li>
+            <li>Delete: Deletes a node from the tree.</li>
+            <!-- <li>Traversal: Traverses through the tree in either inorder, preorder or postorder and prints the values or nodes of the tree.</li> -->
+        </ul>
+        <br>
+        <h3><b>Time Complexities</b></h3>
+        <ul>
+            <li>Insertion:  O(log n)</li>
+            <li>Deletion:  O(log n)</li>
+            <li>Searching:  O(log n)</li>
+            <p>Where  n  is the number of nodes in the BTree.</p>
+        </ul>
+        </div>
+    <hr>
+    <div id="code">
+        <h1>Implementation of B-tree</h1>
+    <br>
+    <h3>Search Operation</h3>
+    <pre>
+        <code>
+            BtreeSearch(x, k)
+                i = 1
+                while i ≤ n[x] and k ≥ keyi[x]        // n[x] means number of keys in x node
+                    do i = i + 1
+                if i  n[x] and k = keyi[x]
+                    then return (x, i)
+                if leaf [x]
+                    then return NIL
+                else
+                    return BtreeSearch(ci[x], k)
+        </code>
+    </pre> 
+    <h3>Insert Operation</h3>
+    <pre>
+        <code>
+            BtreeInsertion(T, k)
+                r = root[T]
+                if n[r] = 2t - 1
+                    s = AllocateNode()
+                    root[T] = s
+                    leaf[s] = FALSE
+                    n[s] <- 0
+                    c1[s] <- r
+                    BtreeSplitChild(s, 1, r)
+                    BtreeInsertNonFull(s, k)
+                else BtreeInsertNonFull(r, k)
+                BtreeInsertNonFull(x, k)
+                i = n[x]
+                if leaf[x]
+                    while i ≥ 1 and k < keyi[x]
+                        keyi+1 [x] = keyi[x]
+                        i = i - 1
+                    keyi+1[x] = k
+                    n[x] = n[x] + 1
+                else
+                    while i ≥ 1 and k < keyi[x]
+                        i = i - 1
+                    i = i + 1
+                    if n[ci[x]] == 2t - 1
+                        BtreeSplitChild(x, i, ci[x])
+                        if k &rt; keyi[x]
+                            i = i + 1
+                     BtreeInsertNonFull(ci[x], k)
+                BtreeSplitChild(x, i)
+                BtreeSplitChild(x, i, y)
+                z = AllocateNode()
+                leaf[z] = leaf[y]
+                n[z] = t - 1
+                for j = 1 to t - 1
+                    keyj[z] = keyj+t[y]
+                if not leaf [y]
+                    for j = 1 to t
+                        cj[z] = cj + t[y]
+                n[y] = t - 1
+                for j = n[x] + 1 to i + 1
+                    cj+1[x] = cj[x]
+                ci+1[x] = z
+                for j = n[x] to i
+                    keyj+1[x] = keyj[x]
+                keyi[x] = keyt[y]
+                n[x] = n[x] + 1
+            </code>
+    </pre>
+ 
+    <h3>Delete Operation</h3>
+    <p>There are three main cases for deletion operation in a B tree:
+
+        <ul>
+            <li>Case I - The key to be deleted lies in the leaf. There are two cases for it.</li>
+            <ol type="circle">
+                <li>The deletion of the key does not violate the property of the minimum number of keys a node should hold.</li>
+                <li>The deletion of the key violates the property of the minimum number of keys a node should hold.</li>
+                <p>In this case, we borrow a key from its immediate neighboring sibling node in the order of left to right.
+        
+                    First, visit the immediate left sibling. If the left sibling node has more than a minimum number of keys, then borrow a key from this node.
+                    
+                    Else, check to borrow from the immediate right sibling node.
+                    
+                    If both the immediate sibling nodes already have a minimum number of keys, then merge the node with either the left sibling node or the right sibling node. 
+                    This merging is done through the parent node.</p>
+            </ol>
+            <li>Case II - If the key to be deleted lies in the internal node, the following cases occur:</li>
+            <ol type="circle">
+                <li>The internal node, which is deleted, is replaced by an inorder predecessor if the left child has more than the minimum number of keys.</li>
+                <li>The internal node, which is deleted, is replaced by an inorder successor if the right child has more than the minimum number of keys.</li>
+                <li>If either child has exactly a minimum number of keys then, merge the left and the right children. 
+                    <p>After merging if the parent node has less than the minimum number of keys then, look for the siblings as in Case I.</p></li>
+            </ol>
+            <li>Case III</li>
+            <p>In this case, the height of the tree shrinks. 
+                If the target key lies in an internal node, and the deletion of the key leads to a fewer number of keys in the node (i.e. less than the minimum required), then look for the inorder predecessor and the inorder successor. 
+                If both the children contain a minimum number of keys then, borrowing cannot take place. This leads to Case II(3) i.e. merging the children.</p>
+        </ul>    
+    </div>
+    <hr>
+
+    <div id="dis">
+        <h1>Applications:</h1>
+            <ul>
+                <li>B trees are used to index the data especially in large databases as access to data stored in large databases on disks is very time-consuming.</li>
+                <li>Searching of data in larger unsorted data sets takes a lot of time but this can be improved significantly with indexing using B tree.</li>
+            </ul>
+        
+    
+        <h1>Advantages:</h1>
+        <ul>
+            <li>Keeps keys in sorted order for sequential traversing</li>
+            <li>Uses a hierarchical index to minimize the number of disk reads</li>
+            <li>Uses partially full blocks to speed up insertions and deletions</li>
+            <li>Keeps the index balanced with a recursive algorithm</li>
+        </ul>
+        <h1>Disadvantages:</h1>
+        <ul>
+            <li>The major drawback of B-tree is the difficulty of traversing the keys sequentially.</li>
+        </ul>
+        </div>
+</body>
+</html>

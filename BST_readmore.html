@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Introduction: Binary Search Tree</title>
+
+</head>
+<body>
+    <div class="readmore1">
+        <h1><center>Binary Search Tree</center></h1>
+        <br>
+        <div id="new">
+            <h1><b>What is a BST?</b></h1>
+            <p><img src="/images/9c41ed8d-5f05-43b5-90cc-11bb97e9710b.jpg" alt="alt text" height="300" width="400" style="float: right">A BST(Binary Search Tree) is a kind of data structure that is used to represent the data in hierarchical form and follows some order to arrange the elements. 
+            In a Binary search tree, the value of left node must be smaller than the parent node, and the value of right node must be greater than the parent node. 
+            This rule is applied recursively to the left and right subtrees of the root.</p>
+            <br>
+            <!-- <div class="img1">
+                <img src="/images/9c41ed8d-5f05-43b5-90cc-11bb97e9710b.jpg"  />
+            </div> -->
+        
+            <h3><b>Properties of a BST</b></h3>
+            <ul>
+                <li>Each tree has a root node at the top (also known as Parent Node) containing some value.</li>
+                <li>Each node has zero or not more than 2 child nodes.</li>
+                <li>The left subtree of a node contains only nodes with keys lesser than the node’s key.</li>
+                <li>The right subtree of a node contains only nodes with keys greater than the node’s key.</li>
+                <li>The left and right subtree each must also be a binary search tree. </li>
+                <li>There must be no duplicate nodes.</li>
+            </ul>
+            <br>
+            <h3><b>Basic Operations on Binary Search Tree</b></h3>
+            <ul>
+                <li>Create: Creates an empty tree.</li>
+                <li>Insert: Insert a node in the tree.</li>
+                <li>Search: Searches for a node in the tree.</li>
+                <li>Delete: Deletes a node from the tree.</li>
+                <li>Traversal: Traverses through the tree in either inorder, preorder or postorder and prints the values or nodes of the tree.</li>
+            </ul>
+            <br>
+            <h3><b>Time Complexities</b></h3>
+            <ul>
+                <li>Worst-case performance:  O(n)</li>
+                <li>Best-case performance:  O(1)</li>
+                <li>Average performance:  O(log n)</li>
+                <li>Worst-case space complexity:  O(1)</li>
+                <p>Where  n  is the number of nodes in the BST. Worst case is O(n) since BST can be unbalanced.</p>
+            </ul>
+        </div>
+        <hr>
+        <div id="code">
+            <h1>Implementation of BST</h1>
+            <p>Here's a definition for a BST node in C++ having some data, referencing to its left and right child nodes.</p>
+            <pre>
+                <code>
+                    struct node {
+                    int data;
+                    struct node *leftChild;
+                    struct node *rightChild;
+                    };
+                </code>
+            </pre>
+        
+            <h3>Search Operation</h3>
+            <pre>
+                <code>
+                    struct node* search(int data){
+                        struct node *current = root;
+                        printf("Visiting elements: ");
+                        
+                        while(current->data != data){
+                        
+                            if(current != NULL) {
+                                printf("%d ",current->data);
+                                
+                            //go to left tree
+                                if(current->data > data){
+                                    current = current->leftChild;
+                                }//else go to right tree
+                                else {                
+                                    current = current->rightChild;
+                                }
+                                
+                                //not found
+                                if(current == NULL){
+                                return NULL;
+                                }
+                            }			
+                        }
+                        return current;
+                    }
+                    </code>
+            </pre>
+            <h3>Insert Operation</h3>
+            <pre>
+                <code>
+                    void insert(int data) {
+                        struct node tempNode = (struct node) malloc(sizeof(struct node));
+                        struct node *current;
+                        struct node *parent;
+                    
+                        tempNode->data = data;
+                        tempNode->leftChild = NULL;
+                        tempNode->rightChild = NULL;
+                    
+                        //if tree is empty
+                        if(root == NULL) {
+                        root = tempNode;
+                        }
+                        else{
+                            current = root;
+                            parent = NULL;
+                    
+                            while(1) {                
+                                parent = current;
+                                
+                                //go to left of the tree
+                                if(data < parent->data) {
+                                    current = current->leftChild;                
+                                    //insert to the left
+                                    
+                                    if(current == NULL) {
+                                        parent->leftChild = tempNode;
+                                        return;
+                                    }
+                                }//go to right of the tree
+                                else {
+                                    current = current->rightChild;
+                                
+                                    //insert to the right
+                                    if(current == NULL) {
+                                    parent->rightChild = tempNode;
+                                    return;
+                                    }
+                                }
+                            }            
+                        }
+                    }  
+                </code>
+            </pre>  
+            <h3>Delete Operation</h3> 
+            <pre>
+                <code>
+                    void deleteNode(struct node* root, int data){
+
+                        if (root == NULL) root=tempnode; 
+                
+                        if (data < root->key) 
+                            root->left = deleteNode(root->left, key); 
+                
+                
+                        else if (key > root->key) 
+                            root->right = deleteNode(root->right, key); 
+                
+                        else
+                        { 
+                            if (root->left == NULL) 
+                            { 
+                                struct node *temp = root->right; 
+                                free(root); 
+                                return temp; 
+                            } 
+                            else if (root->right == NULL) 
+                            { 
+                                struct node *temp = root->left; 
+                                free(root); 
+                                return temp; 
+                            } 
+                
+                            struct node* temp = minValueNode(root->right); 
+                
+                            root->key = temp->key; 
+                
+                            root->right = deleteNode(root->right, temp->key); 
+                        } 
+                        return root; 
+                    }
+                </code>
+            </pre>
+        </div>
+        <hr>
+        <div id="dis">
+            <h1>Advantages:</h1>
+            <ul>
+                <li>Data Storage- When data is stored in different nodes and arranged in a pattern, it is easy to remember the organized structure of data and this is the main advantage of BST. </li>
+                <li>Representation- BST is mainly used to represent any form of relationships so that it shows us whether it is linked or sequential relationship between one another.</li>
+                <li>Updating Data- It is easier to update data in the form of creation or deletion or any kind of editing in BST than in any form of lists or arrays.</li>
+                <li>Data Search- Another advantage of BST is faster data search. When data search moves from one node to another, half of the subtree is eliminated which makes data search faster for the next set of nodes.</li>
+                <li>Data Access- This particularly helps users to access data from anywhere and it is faster than lists.</li>
+            </ul>
+            <br>
+            <h1>Disadvantages:</h1>
+            <ul>
+                <li>It employs recursive approach which requires more stack space.</li>
+                <li>Programming binary search algorithm is error prone and difficult.</li>
+                <li>The interaction of binary search with memory hierarchy i.e. caching is poor(because of its random access nature).</li>
+            </ul>
+        </div>
+
+    </div>
+    
+</body>
+</html>

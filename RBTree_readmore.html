@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Introduction: RB Trees</title>
+</head>
+<body>
+    <div class="rbread">
+        <h1><center>Red-Black Trees</center></h1>
+    <br>
+    <div id="new">
+        <h1><b>What is a RB Tree?</b></h1>
+        <p><img src="/images/WhatsApp Image 2022-12-01 at 21.36.15 (1).jpeg" alt="alt text" height="300" width="400" style="float: right">A red-black tree is a kind of self-balancing binary search tree where each node has an extra bit, and that bit is often interpreted as the color (red or black). 
+            These colors are used to ensure that the tree remains balanced during insertions and deletions. It must be noted that as each node requires only 1 bit of space to store the color information, these types of trees show identical memory footprints to the classic (uncolored) binary search tree. 
+        </p>
+        <br>
+        <!-- <div id="image">
+            <img src="/images/WhatsApp Image 2022-12-01 at 21.36.15 (1).jpeg"  height="300" width="400"/>
+        </div> -->
+    
+        <h3><b>Properties of a Red Black tree</b></h3>
+        <p>A red-black tree satisfies the following properties:</p>
+        <ul>
+            <li>Every node is colored, either red or black.</li>
+            <li>The root node is black.</li>
+            <li>Every leaf (NIL) is black.</li>
+            <li>If a red node has children then, the children are always black.</li>
+            <li>For each node, any simple path from this node to any of its descendant leaf has the same black-depth (the number of black nodes).</li>
+            <li>So, a red-black tree of height h has black height >= h/2.</li>
+            <li>Height of a red-black tree with n nodes is h<= 2 log2(n + 1).</li>
+            <li>All leaves (NIL) are black.</li>
+        </ul>
+        <br>
+        <h3><b>Basic Operations on B+ Tree</b></h3>
+        <ul>
+            <li>Create: Creates an empty tree.</li>
+            <li>Insert: Insert a node in the tree.</li>
+            <li>Rotation: For self balancing of the tree.</li>
+            <li>Delete: Deletes a node from the tree.</li>
+            <li>Search: Searches a node or value in the given RB tree.</li>
+            <!-- <li>Traversal: Traverses through the tree in either inorder, preorder or postorder and prints the values or nodes of the tree.</li> -->
+        </ul>
+        <br>
+        <h3><img src="/images/WhatsApp Image 2022-12-01 at 21.36.15.jpeg" alt="alt text" height="300" width="500" style="float: right">Red Black Rotations</h3>
+        <ul>
+            <li>LL: Left Left Rotation</li>
+            <li>LR: Left Right Rotation</li>
+            <li>RR: Right Right Rotation</li>
+            <li>RL: Right Left Rotation</li>
+        </ul>
+        <!-- <div id="rotate">
+            <img src="" height="300" width="400" />
+        </div> -->
+        <br>
+        <h3><b>Time Complexities</b></h3>
+        <ul>
+            <li>Insertion:  O(log n)</li>
+            <li>Deletion:  O(log n)</li>
+            <li>Searching:  O(log n)</li>
+            <p>Where  n  is the number of nodes in the RB Tree.</p>
+        </ul>
+        </div>
+    <hr>
+    <div id="code">
+        <h1>Implementation of RB tree</h1>
+    <br>
+    <h3>Search Operation</h3>
+    <pre>
+        <code>
+            searchElement (tree, val)
+            Step 1:
+                If tree -> data = val OR tree = NULL
+                    Return tree
+                Else
+                    If val < data
+                        Return searchElement (tree -> left, val)
+                    Else
+                        Return searchElement (tree -> right, val)
+                    [ End of if ]
+                [ End of if ]
+
+            Step 2: END
+        </code>
+    </pre>
+    <h3>Insert Operation</h3>
+    
+    <ol>
+        <li>Check whether tree is Empty.</li>
+        <li>If tree is Empty then insert the newNode as Root node with color Black and exit from the operation.</li>
+        <li>If tree is not Empty then insert the newNode as a leaf node with Red color.</li>
+        <li>If the parent of newNode is Black then exit from the operation.</li>
+        <li>If the parent of newNode is Red then check the color of parent node's sibling of newNode.</li>
+        <li>If it is Black or NULL node then make a suitable Rotation and Recolor it.</li>
+        <li>If it is Red colored node then perform Recolor and Recheck it. Repeat the same until tree becomes Red Black Tree.</li>
+    </ol>
+ 
+    <h3>Delete Operation</h3>
+    <p>There are two main cases for deletion operation in a B tree:
+
+        <ul>
+            <li>Case 1: If the value to be deleted is present in the leaf node only</li>
+            <p>If the value to be deleted is present in the leaf node only, then just simply delete it!</p>
+            <li>Case 2: If the value to be deleted is present in the leaf node and has a pointer to it as well</li>
+            <p>Locate the node that you want to delete and remove it from the leaf node, but we also need to remove it from the index that points to this node. 
+                Remove the pointer and move the first value of the right child into the parent node.</p>
+        </ul>
+    </div>
+    <hr>
+    <div id="dis">
+        <h1>Applications:</h1>
+        <ul>
+            <li>Most of the self-balancing BST library functions like map, multiset, and multimap in C++ use Red-Black Trees.</li>
+            <li>It is used to implement CPU Scheduling Linux. Completely Fair Scheduler uses it.</li>
+            <li>It is also used in the K-mean clustering algorithm in machine learning for reducing time complexity.</li>
+            <li>Moreover, MySQL also uses the Red-Black tree for indexes on tables in order to reduce the searching and insertion time.</li>
+        </ul>
+        <h1>Advantages:</h1>
+    <ul>
+        <li>Red-black trees balance the level of the parallel tree.</li>
+        <li>Red-black tree gets some margin to structure the tree by reestablishing the level of the parallel tree.</li>
+        <li>The time intricacy for search activity is O(log n).</li>
+        <li>It has similarly low constants in a wide scope of situations.</li>
+    </ul>
+    <h1>Disadvantages:</h1>
+    <ul>
+        <li>Complicated to use due to all the activity edge cases; generally you’d need to utilize a standard library execution (for example: TreeSet in Java, STL set in C++, and so forth) instead of carrying out one yourself without any preparation.</li>
+        <li>On the off chance that you plan to just form the tree once and just perform read activities from there on, AVL trees offer better execution.</li>
+        <li>Since B-trees can have a variable number of children, they are regularly liked over red-black trees for ordering and putting away a lot of data on plates, since they can be kept somewhat shallow to restrict circle tasks.</li>
+        <li>Locking red-black trees perform inefficiently with simultaneous access compared to locking skip lists, which (1) very fast even with simultaneous access; (2) are frequently less difficult to carry out; and (3) offer basically all the advantages of locking red-dark trees.</li>
+    </ul>
+    </div>
+    
+</body>
+</html>

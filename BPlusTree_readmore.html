@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Introduction: B+ Trees</title>
+</head>
+<body>
+    <div class="bplusread">
+        <h1><center>B+ Trees</center></h1>
+        <br>
+        <div id="new">
+            <h1><b>What is a B+ Tree?</b></h1>
+            <p><img src="/images/WhatsApp Image 2022-12-01 at 21.33.11.jpeg" alt="alt text" height="300" width="400" style="float: right">A B+ Tree is simply an extended version of a B Tree, in which the values or pointers are stored at the leaf node level, making the various operations on it relatively easier.
+            Each leaf is at the same height and all leaf nodes have links to the other leaf nodes. The root node always has a minimum of two children.
+            The concept of B+ trees exists because of it being much more convenient, both in terms of operations on it, as well as efficiency.
+            </p>
+            <br>
+            <div id="image">
+                
+            </div>
+    
+            <h3><b>Properties of a B+ tree</b></h3>
+            <ul>
+                <li>All data is stored in the leaf nodes, while the internal nodes store just the indices.</li>
+                <li>Each leaf is at the same height.</li>
+                <li>All leaf nodes have links to the other leaf nodes.</li>
+                <li>The root node has a minimum of two children.</li>
+                <li>Each node except root can have a maximum of m children and a minimum of m/2 children.</li>
+                <li>Each node can contain a maximum of m-1 keys and a minimum of ⌈m/2⌉ - 1 keys.</li>
+            </ul>
+            <br>
+            <h3><b>Basic Operations on B+ Tree</b></h3>
+            <ul>
+                <li>Create: Creates an empty tree.</li>
+                <li>Insert: Insert a node in the tree.</li>
+                <li>Search: Searches for a node in the tree.</li>
+                <li>Delete: Deletes a node from the tree.</li>
+            <!-- <li>Traversal: Traverses through the tree in either inorder, preorder or postorder and prints the values or nodes of the tree.</li> -->
+            </ul>
+            <br>
+            <h3><b>Time Complexities</b></h3>
+            <ul>
+                <li>Insertion:  O(log n)</li>
+                <li>Deletion:  O(log n)</li>
+                <li>Searching:  O(log n)</li>
+                <p>Where  n  is the number of nodes in the B+ Tree.</p>
+            </ul>
+            </div>
+        <hr>
+        <div id="code">
+            <h1>Implementation of B+ tree</h1>
+            <br>
+            <h3>Search Operation</h3>
+            <p>So, we are gonna understand the procedure for the same now, with the help of the following algorithm:</p>
+            <ul>
+                <li>Perform a binary search on the current node's records.</li>
+                <li>If a record matching the search key is discovered, return it.</li>
+                <li>Report an unsuccessful search if the current node is a leaf node and the key is not found.</li>
+                <li>Otherwise, go back to the beginning and repeat the process.</li>
+            </ul>
+            <h3>Insert Operation</h3>
+            <p>Before we look at the steps of insertion of a node, let's understand the possible cases:</p>
+            <ul>
+                <li>Case 1: The leaf node is not full</li>
+                <p>Insert the key into the leaf node in increasing order if the leaf isn't full.</p>
+                <li>Case 2: The leaf node is full</li>
+                <p>Step 1: Insert the new node as a leaf node, in the increasing order. Now since the leaf node was already full, some balancing would be needed.</p>
+                <p>Step 2: Break the node at m/2th position. </p>
+                <p>Step 3: Add the m/2nd key to the parent node.</p> 
+                <p>Step 4: In case the parent node is already full, just repeat the steps 2 and 3.</p>
+            </ul>
+ 
+            <h3>Delete Operation</h3>
+            <p>There are two main cases for deletion operation in a B tree:
+
+            <ul>
+                <li>Case 1: If the value to be deleted is present in the leaf node only</li>
+                <p>If the value to be deleted is present in the leaf node only, then just simply delete it!</p>
+                <li>Case 2: If the value to be deleted is present in the leaf node and has a pointer to it as well</li>
+                <p>Locate the node that you want to delete and remove it from the leaf node, but we also need to remove it from the index that points to this node. 
+                Remove the pointer and move the first value of the right child into the parent node.</p>
+            </ul>
+        </div>
+        <hr>
+        <div id="dis">
+            <h1>Applications:</h1>
+            <ul>
+                <li>Multilevel Indexing</li>
+                <li>Database indexing</li>
+                <li>Faster operations on the tree (insertion, deletion, search)</li>
+            </ul>
+            <h1>Advantages:</h1>
+            <ul>
+                <li>Records can be fetched in equal number of disk accesses.</li>
+                <li>Height of the tree remains balanced and less as compare to B tree.</li>
+                <li>We can access the data stored in a B+ tree sequentially as well as directly.</li>
+                <li>Keys are used for indexing.</li>
+                <li>Faster search queries as the data is stored only on the leaf nodes.</li>
+            </ul>
+            <h1>Disadvantages:</h1>
+            <ul>
+                <li>Minor disadvantage of using B+ trees is the extra insertion and deletion overhead, space overhead.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
