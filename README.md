@@ -14,20 +14,20 @@ do the representation of the trees. It doesn’t matter at what kind of location
 to visualize the trees as long as they are connected to the Internet.
 
 Advantages:
-* • All the possible trees that are used in teaching data structures are present in one
+* All the possible trees that are used in teaching data structures are present in one
 website.
-* • The user doesn’t have to draw the figures manually, as it is time consuming.
-* • It provides an opportunity to expand your understanding of the subject with specific
+* The user doesn’t have to draw the figures manually, as it is time consuming.
+* It provides an opportunity to expand your understanding of the subject with specific
 technologies and exploring them in new contexts and ways.
 
 You can use Tree Visualizer website or platform to perform four main actions or operations
 on a tree:
-* • Insert -create a root node or append the new value into the existing tree.
-* • Delete-delete the existing node from the existing tree or created tree at that moment
+* Insert -create a root node or append the new value into the existing tree.
+* Delete-delete the existing node from the existing tree or created tree at that moment
 by the user.
-* • Search/Find-apply searching algorithm to find the desired value in the tree and get
+* Search/Find-apply searching algorithm to find the desired value in the tree and get
 the value.
-* • Print-traverses through the complete tree and gives the values of the tree in in-order,
+* Print-traverses through the complete tree and gives the values of the tree in in-order,
 pre-order and post-order.
 
 
