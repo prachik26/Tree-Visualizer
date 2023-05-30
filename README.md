@@ -29,3 +29,28 @@ by the user.
 the value.
 • Print-traverses through the complete tree and gives the values of the tree in in-order,
 pre-order and post-order.
+
+
+Binary Search Tree
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/d4d874cc-7eb1-4635-92fb-9b290baa685f)
+
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/1370c983-7be3-4bee-a746-0750fb48940a)
+
+
+B-Tree
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/f7b821fb-2ccd-4d06-8977-80f9210781aa)
+
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/dd9be7cc-82fc-4fee-ae0c-31159cea5307)
+
+
+B+ Tree
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/52eb47da-2227-470e-8a99-38374446158a)
+
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/0988a085-33dd-49cb-b849-7546cc93ad7d)
+
+
+Red-Black Tree
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/42317bb2-284a-49d8-b13d-2fc9ce5840b7)
+
+![image](https://github.com/prachik26/Tree-Visualizer/assets/83691953/54fa0a79-e9ef-4c38-9ebb-907384b105fd)
+
